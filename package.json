@@ -1,0 +1,20 @@
+{
+  "name": "!!REPLACE-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Concise Constructs LLC",
+  "license": "ISC",
+  "description": "This is the server side code to manipulate the Contact data model.",
+  "dependencies": {
+    "aws-sdk": "^2.439.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.14",
+    "@types/node": "^11.11.3",
+    "serverless-plugin-include-dependencies": "^3.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": []
+}

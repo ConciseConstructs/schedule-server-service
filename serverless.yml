@@ -1,0 +1,211 @@
+service: !!REPLACE
+
+
+provider:
+  name: aws
+  region: us-east-2
+  stage: DEV
+  runtime: nodejs10.x
+  role: arn:aws:iam::556332110707:role/LambdaBasicPrivileges
+  environment: ${self:custom.environments.${opt:stage, 'DEV'}}
+
+custom:
+  saasName: '!!REPLACE'
+  pathToHandler: "compiled/src"
+  pathToJSFile: "src"
+  accessKeyId: ${ssm:concise-accessKeyId~true}
+  secretAccessKey: ${ssm:concise-secretAccessKey~true}
+  region: ${ssm:concise-region~true}
+  model: '!!REPLACE'
+  createdAt: 'createdAt'
+  updatedAt: 'updatedAt'
+  indexA: ''
+  indexB: ''
+  indexC: ''
+  environments:
+    DEV:
+      saasName: ${self:custom.saasName}
+      stage: 'DEV'
+      model: ${self:custom.model}
+      accessKeyId: ${self:custom.accessKeyId}
+      secretAccessKey: ${self:custom.secretAccessKey}
+      region: ${self:custom.region}
+      createdAt: ${self:custom.createdAt}
+      updatedAt: ${self:custom.updatedAt}
+      indexA: ${self:custom.indexA}
+      indexB: ${self:custom.indexB}
+      indexC: ${self:custom.indexC}
+    PROD:
+      saasName: ${self:custom.saasName}
+      stage: 'PROD'
+      model: ${self:custom.model}
+      accessKeyId: ${self:custom.accessKeyId}
+      secretAccessKey: ${self:custom.secretAccessKey}
+      region: ${self:custom.region}
+      createdAt: ${self:custom.createdAt}
+      updatedAt: ${self:custom.updatedAt}
+      indexA: ${self:custom.indexA}
+      indexB: ${self:custom.indexB}
+      indexC: ${self:custom.indexC}
+
+
+
+plugins:
+  - serverless-plugin-include-dependencies
+
+
+package:
+  individually: true
+  exclude:
+    - "*.*"
+    - "src/**"
+    - "compiled/**"
+    - "correctModuleNames.js"
+  include:
+    - "*.js"
+
+
+
+functions:
+
+  read-all:
+    handler: ${self:custom.pathToHandler}/read-all.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-all.js"
+    events:
+      - http:
+          path: read-all
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-isExactly:
+    handler: ${self:custom.pathToHandler}/read-isExactly.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isExactly.js"
+    events:
+      - http:
+          path: read-isExactly
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-beginsWith:
+    handler: ${self:custom.pathToHandler}/read-beginsWith.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-beginsWith.js"
+    events:
+      - http:
+          path: read-beginsWith
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+
+  read-isBetween:
+    handler: ${self:custom.pathToHandler}/read-isBetween.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isBetween.js"
+    events:
+      - http:
+          path: read-isBetween
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-isGreaterOrEqual:
+    handler: ${self:custom.pathToHandler}/read-isGreaterOrEqual.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isGreaterOrEqual.js"
+    events:
+      - http:
+          path: read-isGreaterOrEqual
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-isGreaterThan:
+    handler: ${self:custom.pathToHandler}/read-isGreaterThan.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isGreaterThan.js"
+    events:
+      - http:
+          path: read-isGreaterThan
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-isLessOrEqual:
+    handler: ${self:custom.pathToHandler}/read-isLessOrEqual.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isLessOrEqual.js"
+    events:
+      - http:
+          path: read-isLessOrEqual
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  read-isLessThan:
+    handler: ${self:custom.pathToHandler}/read-isLessThan.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/read-isLessThan.js"
+    events:
+      - http:
+          path: read-isLessThan
+          method: get
+          cors: true
+    tags:
+      type: api
+
+
+  update:
+    timeout: 180 # optional, in seconds, default is 6
+    handler: ${self:custom.pathToHandler}/update.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/update"
+    events:
+      - http:
+          path: update
+          method: put
+          cors: true
+    tags:
+      type: api
+
+
+  delete:
+    timeout: 180 # optional, in seconds, default is 6
+    handler: ${self:custom.pathToHandler}/delete.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/delete.js"
+    events:
+      - http:
+          path: delete
+          method: delete
+          cors: true
+    tags:
+      type: api
