@@ -1,5 +1,5 @@
 {
-  "name": "!!REPLACE-server",
+  "name": "tags-server",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Concise Constructs LLC",

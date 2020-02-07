@@ -1,4 +1,4 @@
-service: !!REPLACE
+service: qa
 
 
 provider:
@@ -10,13 +10,13 @@ provider:
   environment: ${self:custom.environments.${opt:stage, 'DEV'}}
 
 custom:
-  saasName: '!!REPLACE'
+  saasName: 'qa'
   pathToHandler: "compiled/src"
   pathToJSFile: "src"
   accessKeyId: ${ssm:concise-accessKeyId~true}
   secretAccessKey: ${ssm:concise-secretAccessKey~true}
   region: ${ssm:concise-region~true}
-  model: '!!REPLACE'
+  model: 'tags'
   createdAt: 'createdAt'
   updatedAt: 'updatedAt'
   indexA: ''
