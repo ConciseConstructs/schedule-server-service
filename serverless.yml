@@ -1,4 +1,4 @@
-service: qa
+service: ${self:custom.saasName}-${self:custom.model}
 
 
 provider:
