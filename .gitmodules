@@ -4,6 +4,3 @@
 [submodule "lib/classes/crud"]
 	path = lib/classes/crud
 	url = https://github.com/ConciseConstructs/crud.git
-[submodule "lib/interfaces/icrud"]
-	path = lib/interfaces/icrud
-	url = https://github.com/ConciseConstructs/icrud.git

@@ -1,19 +1,7 @@
 import { Context, Callback } from 'aws-lambda'
 import { IResponse } from '../lib/classes/lambdahandler/Response.class'
 import { UpdateHandler } from '../lib/classes/crud/UpdateHandler.class'
-
-
-export interface IScheduleUpdateRequest {
-  item: {
-    saas:string
-    id:string
-    createdAt:number
-    modifiedAt:number
-    dueAt:number
-    status:string
-    details:any
-  }
-}
+import { IScheduleUpdateRequest } from '../lib/interfaces/schedule-server-service-interface/update.interface'
 
 
 export function handler(incomingRequest:IScheduleUpdateRequest, context:Context, callback:Callback) {
