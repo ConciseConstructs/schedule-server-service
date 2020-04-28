@@ -65,6 +65,21 @@ functions:
       type: api
 
 
+  delete:
+    handler: ${self:custom.pathToHandler}/delete.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/delete.js"
+    events:
+      - http:
+          path: delete
+          method: delete
+          cors: true
+    timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    tags:
+      type: api
+
+
   get-boundTo:
     handler: ${self:custom.pathToHandler}/get-boundTo.handler
     package:
@@ -73,7 +88,7 @@ functions:
     events:
       - http:
           path: get-boundTo
-          method: put
+          method: get
           cors: true
     timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
     tags:
