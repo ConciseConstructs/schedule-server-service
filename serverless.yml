@@ -65,6 +65,21 @@ functions:
       type: api
 
 
+  get-boundTo:
+    handler: ${self:custom.pathToHandler}/get-boundTo.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/get-boundTo.js"
+    events:
+      - http:
+          path: get-boundTo
+          method: put
+          cors: true
+    timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    tags:
+      type: api
+
+
   check:
     handler: ${self:custom.pathToHandler}/check.handler
     package:

@@ -4,3 +4,6 @@
 [submodule "lib/classes/crud"]
 	path = lib/classes/crud
 	url = https://github.com/ConciseConstructs/crud.git
+[submodule "lib/interfaces/schedule-server-service-interface"]
+	path = lib/interfaces/schedule-server-service-interface
+	url = https://github.com/ConciseConstructs/schedule-server-service-interface.git
