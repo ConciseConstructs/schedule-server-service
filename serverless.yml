@@ -95,6 +95,21 @@ functions:
       type: api
 
 
+  remove-boundTo:
+    handler: ${self:custom.pathToHandler}/remove-boundTo.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/remove-boundTo.js"
+    events:
+      - http:
+          path: remove-boundTo
+          method: post
+          cors: true
+    timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    tags:
+      type: api
+
+
   check:
     handler: ${self:custom.pathToHandler}/check.handler
     package:
