@@ -8,6 +8,12 @@ provider:
   runtime: nodejs10.x
   role: arn:aws:iam::556332110707:role/LambdaBasicPrivileges
   environment: ${self:custom.environments.${opt:stage, 'DEV'}}
+  deploymentBucket:
+    tags:
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
 
 custom:
   saasName: 'Schedule'
@@ -16,6 +22,11 @@ custom:
   region: ${ssm:concise-region~true}
   pathToHandler: "compiled/src"
   pathToJSFile: "src"
+  apiGatewayTags:
+    saas: ${self:custom.saasName}
+    stage: ${opt:stage, 'DEV'}
+    scope: global
+    type: schedule
   environments:
     DEV:
       saasName: ${self:custom.saasName}
@@ -34,6 +45,7 @@ custom:
 
 plugins:
   - serverless-plugin-include-dependencies
+  - serverless-tag-api-gateway
 
 
 package:
@@ -62,7 +74,10 @@ functions:
           cors: true
     timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
     tags:
-      type: api
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
 
 
   delete:
@@ -77,7 +92,10 @@ functions:
           cors: true
     timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
     tags:
-      type: api
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
 
 
   get-boundTo:
@@ -92,7 +110,10 @@ functions:
           cors: true
     timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
     tags:
-      type: api
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
 
 
   remove-boundTo:
@@ -107,7 +128,10 @@ functions:
           cors: true
     timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
     tags:
-      type: api
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
 
 
   check:
@@ -118,3 +142,8 @@ functions:
     events:
       - schedule: rate(5 minutes)
     timeout: 180 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    tags:
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
