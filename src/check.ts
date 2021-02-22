@@ -95,6 +95,7 @@ export function handler(incomingRequest:any, context:Context, callback:Callback)
               }).promise()
                 .then(result => { this.onExecuteLambdaFunctionSuccess(result, job) })
                 .catch(error => { this.onExecuteLambdaFunctionFailure(error, job) })
+                .finally(()=> { if (job.reoccuring) this.reoccurJob(job) })
             }
 
 
@@ -152,6 +153,18 @@ export function handler(incomingRequest:any, context:Context, callback:Callback)
                         .then(result => console.log('updateJobStatusSuccess:', result))
                         .catch(error => console.log('updateJobStatusFailure:', error))
                     }
+
+
+
+
+                private reoccurJob(job) {
+                  this.lambda.invoke({
+                    FunctionName: `Schedule-${ process.env.stage }-reoccur`,
+                    Payload: JSON.stringify(job)
+                  }).promise()
+                    .then(result => console.log(`Schedule-${ process.env.stage }-reoccur success:`, result))
+                    .catch(error => console.log(`Schedule-${ process.env.stage }-reoccur error:`, error))
+                }
 
   } // End Handler Class ---------
 

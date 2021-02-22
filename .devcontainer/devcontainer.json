@@ -1,0 +1,5 @@
+{
+    "name": "schedule-server-service",
+    "dockerFile": "DockerFile",
+    "runArgs": ["-u", "node"],
+}

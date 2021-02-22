@@ -147,3 +147,34 @@ functions:
       stage: ${opt:stage, 'DEV'}
       scope: global
       type: schedule
+
+
+  calc-nextDue:
+    handler: ${self:custom.pathToHandler}/calc-nextDue.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/calc-nextDue.js"
+    timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    events:
+      - http:
+          path: calc-nextDue
+          method: post
+          cors: true
+    tags:
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule
+
+
+  reoccur:
+    handler: ${self:custom.pathToHandler}/reoccur.handler
+    package:
+      include:
+      - "${self:custom.pathToJSFile}/reoccur.js"
+    timeout: 30 # optional, in seconds, default is 6, if attached to API Gateway limited to 30
+    tags:
+      saas: ${self:custom.saasName}
+      stage: ${opt:stage, 'DEV'}
+      scope: global
+      type: schedule

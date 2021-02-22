@@ -19,7 +19,8 @@ fs.readdir(path, { encoding: 'utf8'}, (error, files)=> {
                   _this.findReplaceMap = {
                     "twilio_1.Twilio": "twilio_1",
                     "braintree_1.braintree": "braintree_1",
-                    "nodemailer_1.nodemailer": "nodemailer_1"
+                    "nodemailer_1.nodemailer": "nodemailer_1",
+                    "moment_timezone_1.default": "moment_timezone_1"
                   }
                 }
 
